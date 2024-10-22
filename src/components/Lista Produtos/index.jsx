@@ -1,16 +1,13 @@
 export default function Produtos(props) {
     return (
         <>
-            <h1>Lista de Produtos.</h1>
             <ul>
-                {lista.map(produto => (
-                    <li key={produto.id}>
-                        <h2>{produto.title}</h2>
-                        <p>{produto.description}</p>
-                        <p>Preço: R${produto.price}</p>
-                        <img src={produto.image} alt={produto.title} width={100} />
-                    </li>
-                ))}
+                <li key={props.id}>
+                    <img src={props.image} alt={props.title} width={100} />
+                    <h2>{props.title}</h2>
+                    <p>{props.description}</p>
+                    <p>Preço: R${props.price}</p>
+                </li>
             </ul>
         </>
     )

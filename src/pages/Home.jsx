@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Produtos from "../components/Lista Produtos";
 
 export default function Home() {
     const [lista, setLista] = useState([]);
@@ -22,12 +23,7 @@ export default function Home() {
             <h1>Lista de Produtos.</h1>
             <ul>
                 {lista.map(produto => (
-                    <li key={produto.id}>
-                        <h2>{produto.title}</h2>
-                        <p>{produto.description}</p>
-                        <p>Preço: R${produto.price}</p>
-                        <img src={produto.image} alt={produto.title} width={100} />
-                    </li>
+                    <Produtos id={produto.id} image={produto.image} title={produto.title} description={produto.description} price={produto.price}></Produtos>
                 ))}
             </ul>
         </>
