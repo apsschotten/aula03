@@ -27,12 +27,30 @@ export default function App() {
         setLista(listaAux);
     }
 
+    const orderZA = () => {
+        const listaAux = [...lista].sort((a, b) => b.title.localeCompare(a.title));
+        setLista(listaAux);
+    }
+
+    const orderVMm = () => {
+        const listaAux = [...lista].sort((a, b) => b.price - a.price);
+        setLista(listaAux);
+    }
+
+    const orderVmM = () => {
+        const listaAux = [...lista].sort((a, b) => a.price - b.price);
+        setLista(listaAux);
+    }
+
     return (
         <>
             <header className={styles.header}>
                 <h1 className={styles.logo}>Lolja</h1>
             </header>
             <button onClick={orderAZ}>A - Z</button>
+            <button onClick={orderZA}>Z - A</button>
+            <button onClick={orderVmM}>Menor p/ Maior</button> 
+            <button onClick={orderVMm}>Maior p/ Menor</button>         
             <div className={styles.container}>
                 {lista.map(produto => (
                     <div className={styles.cardscontainer}>
