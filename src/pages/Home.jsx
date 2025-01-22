@@ -47,10 +47,12 @@ export default function App() {
             <header className={styles.header}>
                 <h1 className={styles.logo}>Lolja</h1>
             </header>
-            <button onClick={orderAZ}>A - Z</button>
-            <button onClick={orderZA}>Z - A</button>
-            <button onClick={orderVmM}>Menor p/ Maior</button>
-            <button onClick={orderVMm}>Maior p/ Menor</button>
+            <div className={styles.btnctn}>
+                <button onClick={orderAZ} className={styles.buttons}>A - Z</button>
+                <button onClick={orderZA} className={styles.buttons}>Z - A</button>
+                <button onClick={orderVmM} className={styles.buttons}>Menor p/ Maior</button>
+                <button onClick={orderVMm} className={styles.buttons}>Maior p/ Menor</button>
+            </div>
             <div className={styles.container}>
                 {lista.map(produto => (
                     <div className={styles.cardscontainer}>
