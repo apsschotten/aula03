@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Produtos from "../components/Lista Produtos";
+import Produtos from "../components/produtos.jsx";
 
 export default function Home() {
     const [lista, setLista] = useState([]);
