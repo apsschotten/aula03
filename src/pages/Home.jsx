@@ -1,31 +1,71 @@
 import { useEffect, useState } from "react";
-import Produtos from "../components/produtos.jsx";
+import styles from '../styles/Home.module.css'
 
-export default function Home() {
+
+export default function App() {
+
     const [lista, setLista] = useState([]);
 
     useEffect(() => {
         const receberListaProdutos = async () => {
-            try {
-                const resposta = await fetch('https://fakestoreapi.com/products');
-                const dados = await resposta.json();
-                setLista(dados)
-            } catch (error) {
-                alert("Falha durante a comunicação com o servidor."); //Modo 01 (Sala de Aula) --> Alerta diretamente o usuário
-                console.error("Falha durante a comunicação com o servidor.") //Modo 02 (Pedido em Moodle) --> Escreve a mensagem de erro no console            
-            }
+            const resposta = await fetch('https://fakestoreapi.com/products');
+            const dados = await resposta.json();
+            setLista(dados);
         }
+
         receberListaProdutos();
     }, []);
 
+    if (lista.length === 0) {
+        return (
+            <h1>Carregando...</h1>
+        )
+    }
+
+    const orderAZ = () => {
+        const listaAux = [...lista].sort((a, b) => a.title.localeCompare(b.title));
+        setLista(listaAux);
+    }
+
+    const orderZA = () => {
+        const listaAux = [...lista].sort((a, b) => b.title.localeCompare(a.title));
+        setLista(listaAux);
+    }
+
+    const orderVMm = () => {
+        const listaAux = [...lista].sort((a, b) => b.price - a.price);
+        setLista(listaAux);
+    }
+
+    const orderVmM = () => {
+        const listaAux = [...lista].sort((a, b) => a.price - b.price);
+        setLista(listaAux);
+    }
+
     return (
         <>
-            <h1>Lista de Produtos.</h1>
-            <ul>
+            <header className={styles.header}>
+                <h1 className={styles.logo}>Lolja</h1>
+            </header>
+            <button onClick={orderAZ}>A - Z</button>
+            <button onClick={orderZA}>Z - A</button>
+            <button onClick={orderVmM}>Menor p/ Maior</button> 
+            <button onClick={orderVMm}>Maior p/ Menor</button>         
+            <div className={styles.container}>
                 {lista.map(produto => (
-                    <Produtos id={produto.id} image={produto.image} title={produto.title} description={produto.description} price={produto.price}></Produtos>
+                    <div className={styles.cardscontainer}>
+                        <div className={styles.card}>
+                            <img src={produto.image} alt={produto.title} className={styles.image} />
+                            <div className={styles.content}>
+                                <h2 className={styles.title}>{produto.title}</h2>
+                                <p className={styles.description}>{produto.description}</p>
+                                <p className={styles.price}>R$ {produto.price.toFixed(2)}</p>
+                                <a href="#" className={styles.button}>Comprar</a>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </>
-    )
+    );
 }
